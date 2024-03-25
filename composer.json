@@ -1,0 +1,36 @@
+{
+  "name": "yassinedoghri/php-iconify",
+  "version": "1.0.0-dev",
+  "description": "A PHP library based on iconify's API to download and render svg icons from popular open source icon sets.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "PHPIconify\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Yassine Doghri",
+      "email": "yassine@doghri.fr",
+      "homepage": "https://yassinedoghri.com",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "kint-php/kint": "^5.1.0",
+    "phpstan/phpstan": "^1.10.65",
+    "rector/rector": "^1.0.3",
+    "symplify/coding-standard": "^11.4.1",
+    "symplify/easy-coding-standard": "^11.5.0"
+  },
+  "scripts": {
+    "dev": "php -S 0.0.0.0:8080",
+    "analyse": "vendor/bin/phpstan analyse --ansi",
+    "rector": "vendor/bin/rector process --dry-run --ansi",
+    "rector:fix": "vendor/bin/rector process --ansi",
+    "style": "vendor/bin/ecs check --ansi",
+    "style:fix": "vendor/bin/ecs check --fix --ansi"
+  }
+}
