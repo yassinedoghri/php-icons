@@ -51,6 +51,26 @@ echo $iconify
 // </svg>
 ```
 
+#### Default Icon Pack
+
+> [!TIP]  
+> Using a consistent icon style throughout your app can help create a cohesive
+> look and feel.
+
+👉 You can set a `default_pack` in the options, that way you won't have to specify the icon pack each time:
+
+```diff
+$options = [
+        'icons_folder' => './php-iconify',
++       'default_pack' => 'material-symbols'
+];
+
+$iconify = new Iconify($options);
+
+-echo $iconify->icon('material-symbols:bolt');
++echo $iconify->icon('bolt');
+```
+
 ## ⚙️ Configuration
 
 The Iconify class takes in options which you can tweak as you please:
@@ -59,6 +79,7 @@ The Iconify class takes in options which you can tweak as you please:
 | -------------- | ---------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `api_hosts`    | `string[]` | Iconify API hosts to call for downloading svg icons. Starts by querying the first host, the rest is used as backup. | Defaults to [Iconify's public hosts](https://iconify.design/docs/api/#public-api): `['https://api.iconify.design', 'https://api.simplesvg.com', 'https://api.unisvg.com']` |
 | `icons_folder` | `string`   | Folder in which to cache icons.                                                                                     | `./php-iconify`                                                                                                                                                            |
+| `default_pack` | `string`   | Default icon pack if none is specified.                                                                             | `""` (empty string)                                                                                                                                                        |
 
 ## ❤️ Acknowledgments
 

@@ -6,8 +6,7 @@ namespace PHPIconify;
 
 use Exception;
 use PHPIconify\Exceptions\IconNotFoundException;
-use PHPIconify\Exceptions\PackNotSetException;
-use PHPIconify\Exceptions\PHPIconifyMisuseException;
+use PHPIconify\Exceptions\LibraryMisuseException;
 
 class Iconify implements \Stringable
 {
@@ -23,15 +22,16 @@ class Iconify implements \Stringable
     protected array $attributes = [];
 
     /**
-     * @var array{api_hosts:string[],icons_folder:string}
+     * @var array{api_hosts:string[],icons_folder:string,default_pack:string}
      */
     protected array $options = [
         'api_hosts'    => ['https://api.iconify.design', 'https://api.simplesvg.com', 'https://api.unisvg.com'],
         'icons_folder' => './php-iconify',
+        'default_pack' => '',
     ];
 
     /**
-     * @param ?array{api_hosts:string[],icons_folder:string} $options
+     * @param ?array{api_hosts?:string[],icons_folder?:string,default_pack?:string} $options
      */
     public function __construct(?array $options = null)
     {
@@ -43,7 +43,7 @@ class Iconify implements \Stringable
     public function __toString(): string
     {
         if ($this->iconPath === '') {
-            throw PHPIconifyMisuseException::forUndefinedIcon();
+            throw LibraryMisuseException::forUndefinedIcon();
         }
 
         // check if icon has already been downloaded
@@ -71,19 +71,24 @@ class Iconify implements \Stringable
     public function icon(string $iconifyIcon): self
     {
         if (! str_contains($iconifyIcon, ':')) {
-            throw PHPIconifyMisuseException::forWrongIconFormat();
+            if ($this->options['default_pack'] === '') {
+                throw LibraryMisuseException::forMissingIconPack();
+            }
+
+            $this->pack = $this->options['default_pack'];
+            $this->icon = $iconifyIcon;
+        } else {
+            $iconParts = explode(':', $iconifyIcon);
+            $this->pack = $iconParts[0];
+            $this->icon = $iconParts[1];
         }
 
-        $iconParts = explode(':', $iconifyIcon);
-        $this->pack = $iconParts[0];
-        $this->icon = $iconParts[1];
-
         if ($this->icon === '') {
-            throw PHPIconifyMisuseException::forEmptyIcon();
+            throw LibraryMisuseException::forEmptyIcon();
         }
 
         if ($this->pack === '') {
-            throw PackNotSetException::forEmptyIconPack($this->icon);
+            throw LibraryMisuseException::forEmptyIconPack($this->icon);
         }
 
         $directory = sprintf('%s/%s', $this->options['icons_folder'], $this->pack);
@@ -126,7 +131,7 @@ class Iconify implements \Stringable
     private function getSVGFromAPI(): string
     {
         if ($this->options['api_hosts'] === []) {
-            throw PHPIconifyMisuseException::forMissingAPIHosts();
+            throw LibraryMisuseException::forMissingAPIHosts();
         }
 
         foreach ($this->options['api_hosts'] as $host) {
