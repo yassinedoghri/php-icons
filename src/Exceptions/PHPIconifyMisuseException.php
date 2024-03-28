@@ -31,9 +31,4 @@ class PHPIconifyMisuseException extends RuntimeException
     {
         return new self('Icon name is empty. Forgot to include it?');
     }
-
-    public static function forEmptyIconPack(string $icon): self
-    {
-        return new self(sprintf('Icon pack is missing for icon "%s". Forgot to include it?', $icon));
-    }
 }

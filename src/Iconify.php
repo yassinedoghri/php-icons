@@ -6,6 +6,7 @@ namespace PHPIconify;
 
 use Exception;
 use PHPIconify\Exceptions\IconNotFoundException;
+use PHPIconify\Exceptions\PackNotSetException;
 use PHPIconify\Exceptions\PHPIconifyMisuseException;
 
 class Iconify implements \Stringable
@@ -82,7 +83,7 @@ class Iconify implements \Stringable
         }
 
         if ($this->pack === '') {
-            throw PHPIconifyMisuseException::forEmptyIconPack($this->icon);
+            throw PackNotSetException::forEmptyIconPack($this->icon);
         }
 
         $directory = sprintf('%s/%s', $this->options['icons_folder'], $this->pack);
