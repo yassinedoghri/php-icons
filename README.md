@@ -1,91 +1,225 @@
-# PHP Iconify 🐘 🙂
+# PHPIcons 🐘 🙂
 
-[![Latest Stable Version](http://poser.pugx.org/yassinedoghri/php-iconify/v)](https://packagist.org/packages/yassinedoghri/php-iconify)
-[![Total Downloads](http://poser.pugx.org/yassinedoghri/php-iconify/downloads)](https://packagist.org/packages/yassinedoghri/php-iconify)
-[![Latest Unstable Version](http://poser.pugx.org/yassinedoghri/php-iconify/v/unstable)](https://packagist.org/packages/yassinedoghri/php-iconify)
-[![License](https://img.shields.io/github/license/yassinedoghri/php-iconify?color=green)](https://packagist.org/packages/yassinedoghri/php-iconify)
-[![PHP Version Require](http://poser.pugx.org/yassinedoghri/php-iconify/require/php)](https://packagist.org/packages/yassinedoghri/php-iconify)
+[![Latest Stable Version](http://poser.pugx.org/yassinedoghri/php-icons/v)](https://packagist.org/packages/yassinedoghri/php-icons)
+[![Total Downloads](http://poser.pugx.org/yassinedoghri/php-icons/downloads)](https://packagist.org/packages/yassinedoghri/php-icons)
+[![Latest Unstable Version](http://poser.pugx.org/yassinedoghri/php-icons/v/unstable)](https://packagist.org/packages/yassinedoghri/php-icons)
+[![License](https://img.shields.io/github/license/yassinedoghri/php-icons?color=green)](https://packagist.org/packages/yassinedoghri/php-icons)
+[![PHP Version Require](http://poser.pugx.org/yassinedoghri/php-icons/require/php)](https://packagist.org/packages/yassinedoghri/php-icons)
 
-A PHP library based on [iconify's API](https://iconify.design/) to download and render svg icons from [popular open source icon sets](https://icon-sets.iconify.design/).
+**A convenient PHP library to render svg icons.**
 
-## ❓ How does it work?
+Get access to over 200,000 icons from more than [150 open source icon sets](https://icon-sets.iconify.design/) directly from your php files!
 
-On first request, PHP Iconify will download the requested icon using Iconify's API, cache it into the defined `icons_folder` and render it.\
-Subsequent requests will load the icon directly from the `icons_folder` and render it.
+Thanks to [Iconify](https://iconify.design/) ❤️
 
 ## 🚀 Getting started
 
 ### 1. Install via composer
 
 ```sh
-composer require yassinedoghri/php-iconify
+composer require yassinedoghri/php-icons
 ```
 
-### 2. Usage
+### 2. Configure
+
+Run the following command to initialize the configuration file:
+
+```sh
+vendor/bin/php-icons init
+```
+
+This will prompt you to create a `php-icons.php` config file in the root of your project. See [config reference](#⚙️-config-reference) for more info.
+
+### 3. Use anywhere
+
+#### 3.1. `icon(string $iconKey)` method
+
+Use the `icon` method in your view files with the icon key string (`{prefix}:{icon}`) as parameter:
+
+- `{prefix}`: is the [icon set prefix](https://iconify.design/docs/icons/icon-set-basics.html#naming)
+- `{name}`: is the [icon name](https://iconify.design/docs/icons/icon-basics.html#icon-names)
 
 ```php
-use PHPIconify\Iconify;
+<?php
 
-$options = [
-        // icons are cached in `./php-iconify` folder by default
-        'icons_folder' => './php-iconify'
-];
+use PHPIcons\PHPIcons;
 
-$iconify = new Iconify($options);
+$phpicons = new PHPIcons('/path/to/config/file.php');
 
-echo $iconify->icon('material-symbols:bolt');
+echo $phpicons->icon('material-symbols:bolt');
 // <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
 //      <path fill="currentColor" d="m8 22l1-7H4l9-13h2l-1 8h6L10 22z"/>
 // </svg>
 ```
 
-👉 **You can add custom attributes** using the `attr()` method, such as classes and styles:
+👉 add any attribute using the `attr()` or `attributes()` methods:
 
 ```php
-echo $iconify
+echo $phpicons
         ->icon('material-symbols:bolt')
         ->attr('class', 'text-2xl')
         ->attr('style', 'color: yellow;');
-// <svg class="text-2xl" style="color: yellow;" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-//      <path fill="currentColor" d="m8 22l1-7H4l9-13h2l-1 8h6L10 22z"/>
-// </svg>
+// <svg class="text-2xl" style="color: yellow;" […]>…</svg>
+
+echo $phpicons
+        ->icon('material-symbols:bolt')
+        ->attributes([
+          'class' => 'text-2xl',
+          'style' => 'color: yellow;'
+        ]);
+// <svg class="text-2xl" style="color: yellow;" […]>…</svg>
 ```
 
-#### Default Icon Pack
+> [!TIP]
+> Find and copy the icon keys of popular open source icon sets from [Iconify's index](https://icon-sets.iconify.design/).
 
-> [!TIP]  
-> Using a consistent icon style throughout your app can help create a cohesive
-> look and feel.
+#### 3.2. Scan source files and load icons
 
-👉 You can set a `default_pack` in the options, that way you won't have to specify the icon pack each time:
+> [!IMPORTANT]  
+> When first defining icons, a placeholder (`�` by default) will be displayed.\
+> Make sure to run the `scan` command to load the SVGs.
 
-```diff
-$options = [
-        'icons_folder' => './php-iconify',
-+       'default_pack' => 'material-symbols'
-];
-
-$iconify = new Iconify($options);
-
--echo $iconify->icon('material-symbols:bolt');
-+echo $iconify->icon('bolt');
+```sh
+vendor/bin/php-icons scan
 ```
 
-## ⚙️ Configuration
+## ⚙️ Config reference
 
-The Iconify class takes in options which you can tweak as you please:
+Your config file is used by both the `php-icons` CLI tool and PHPIcons class, it should look like this:
 
-| option         | type       | description                                                                                                         | default                                                                                                                                                                    |
-| -------------- | ---------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api_hosts`    | `string[]` | Iconify API hosts to call for downloading svg icons. Starts by querying the first host, the rest is used as backup. | Defaults to [Iconify's public hosts](https://iconify.design/docs/api/#public-api): `['https://api.iconify.design', 'https://api.simplesvg.com', 'https://api.unisvg.com']` |
-| `icons_folder` | `string`   | Folder in which to cache icons.                                                                                     | `./php-iconify`                                                                                                                                                            |
-| `default_pack` | `string`   | Default icon pack if none is specified.                                                                             | `""` (empty string)                                                                                                                                                        |
+```php
+<?php
+
+declare(strict_types=1);
+
+use PHPIcons\Config\PHPIconsConfig;
+
+return PHPIconsConfig::configure()
+    ->withPaths([
+      __DIR__ . '/src'
+    ])
+    ->withDefaultPrefix('')
+    ->withPlaceholder('�');
+```
+
+### Paths
+
+`withPaths([])`
+
+List of paths to your source files. PHP files will be parsed and scanned for discovering the icons you have defined.
+
+### API Hosts
+
+`withAPIHosts([])`
+
+[Iconify API](https://iconify.design/docs/api/) hosts to query for downloading svg icons. Starts by querying the first host, the rest is used as backup.
+
+Defaults to Iconify's public hosts: `["https://api.iconify.design","https://api.simplesvg.com", "https://api.unisvg.com"]`
+
+### Local Icon Sets
+
+`withLocalIconSets([])`
+
+If you have custom icons, php-icons can look them up locally in your file system instead of calling for the [Iconify API](https://iconify.design/docs/api/).
+
+> [!IMPORTANT]  
+> php-icons will look for `{name}.svg` files in your local icon sets
+
+Takes in an associative array with the icon set prefix as the key and its path as value.
+
+#### Example
+
+```
+my-custom-set/
+├── heart.svg
+├── rocket.svg
+├── star.svg
+└── user.svg
+```
+
+```php
+// in your config file
+->withLocalIconSets([
+  'custom' => '/path/to/my-custom-set',
+])
+```
+
+```php
+// ✅ ALL GOOD
+echo $phpicons->icon('custom:heart');
+echo $phpicons->icon('custom:rocket');
+echo $phpicons->icon('custom:star');
+echo $phpicons->icon('custom:user');
+
+// ❌ ICONS NOT FOUND
+echo $phpicons->icon('custom:banana');
+echo $phpicons->icon('custom:key');
+```
+
+### Default Prefix
+
+`withDefaultPrefix('')`
+
+Default icon set prefix to use when none is set.
+
+#### Example
+
+With `material-symbols` set as default prefix:
+
+```php
+// this
+echo $phpicons->icon('bolt');
+
+// same as this
+echo $phpicons->icon('material-symbols:bolt');
+```
+
+### Placeholder
+
+`withPlaceholder('�')`
+
+String to show when icon is not found or unknown.
+
+Defaults to `�` (REPLACEMENT CHARACTER).
+
+### Identifiers
+
+`withIdentifiers([])`
+
+Function or method names to match for identifying icon keys in your source files.
+
+Defaults to `['icon']`.
+
+## 🖥️ CLI commands
+
+```sh
+> vendor/bin/php-icons
+
+         _             _
+   _ __ | |__  _ __   (_) ___ ___  _ __  ___
+  | '_ \| '_ \| '_ \  | |/ __/ _ \| '_ \/ __|
+  | |_) | | | | |_) | | | (_| (_) | | | \__ \
+  | .__/|_| |_| .__/  |_|\___\___/|_| |_|___/
+  |_|         |_|
+
+ A convenient PHP library to render svg icons
+----------------------------------------------
+
+PHPIcons, version 1.0.0.0-dev
+
+Commands:
+*
+  init i    Configure PHPIcons interactively
+  scan s    Scans source files and loads icons
+
+Run `<command> --help` for specific help
+```
 
 ## ❤️ Acknowledgments
 
 This wouldn't have been possible without the awesome work from the [Iconify](https://iconify.design/) team and designers that maintain [the many open source icon sets](https://icon-sets.iconify.design/).
 
-Inspired by [astro-icon](https://www.astroicon.dev/).
+Inspired by [astro-icon](https://www.astroicon.dev/), [blade-icons](https://blade-ui-kit.com/blade-icons) and [rector](https://getrector.com/).
 
 ## 📜 License
 

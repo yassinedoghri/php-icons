@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+
+if (php_sapi_name() !== 'cli') {
+    exit;
+}
+
+if (!defined('COMPOSER_BIN_DIR')) {
+    define('COMPOSER_BIN_DIR', $_composer_bin_dir ?? __DIR__ . '/../vendor/bin');
+}
+
+require __DIR__ . '/../src/Console/Constants.php';
+require __DIR__ . '/../src/Console/helpers.php';
+
+require COMPOSER_AUTOLOAD_PATH;
+
+use Ahc\Cli\Application;
+use Composer\InstalledVersions;
+use PHPIcons\Console\Commands\InitCommand;
+use PHPIcons\Console\Commands\ScanCommand;
+
+$version = InstalledVersions::getVersion('yassinedoghri/php-icons');
+
+$app = new Application(
+    'PHPIcons',
+    $version
+);
+
+$app->add(new InitCommand, 'i');
+$app->add(new ScanCommand, 's');
+
+$logo = "
+         _             _                     
+   _ __ | |__  _ __   (_) ___ ___  _ __  ___ 
+  | '_ \| '_ \| '_ \  | |/ __/ _ \| '_ \/ __|
+  | |_) | | | | |_) | | | (_| (_) | | | \__ \
+  | .__/|_| |_| .__/  |_|\___\___/|_| |_|___/
+  |_|         |_|                            
+
+ A convenient PHP library to render svg icons    
+----------------------------------------------
+";
+
+$app->logo($logo)->handle($_SERVER['argv']);

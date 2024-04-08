@@ -1,14 +1,9 @@
 {
-  "name": "yassinedoghri/php-iconify",
+  "name": "yassinedoghri/php-icons",
   "version": "1.0.0-dev",
   "description": "A PHP library based on iconify's API to download and render svg icons from popular open source icon sets.",
   "type": "library",
   "license": "MIT",
-  "autoload": {
-    "psr-4": {
-      "PHPIconify\\": "src/"
-    }
-  },
   "authors": [
     {
       "name": "Yassine Doghri",
@@ -17,14 +12,9 @@
       "role": "Maintainer"
     }
   ],
-  "require": {},
-  "require-dev": {
-    "kint-php/kint": "^5.1.0",
-    "phpstan/phpstan": "^1.10.65",
-    "rector/rector": "^1.0.3",
-    "symplify/coding-standard": "^11.4.1",
-    "symplify/easy-coding-standard": "^11.5.0"
-  },
+  "bin": [
+    "bin/php-icons"
+  ],
   "scripts": {
     "dev": "php -S 0.0.0.0:8000",
     "analyse": "vendor/bin/phpstan analyse --ansi",
@@ -32,5 +22,23 @@
     "rector:fix": "vendor/bin/rector process --ansi",
     "style": "vendor/bin/ecs check --ansi",
     "style:fix": "vendor/bin/ecs check --fix --ansi"
+  },
+  "require": {
+    "php": ">=8.1",
+    "composer-runtime-api": "^2.2",
+    "adhocore/cli": "^v1.0",
+    "nikic/php-parser": "^v4.0"
+  },
+  "require-dev": {
+    "kint-php/kint": "^5.1.0",
+    "phpstan/phpstan": "^1.10.66",
+    "rector/rector": "^1.0.4",
+    "symplify/coding-standard": "^12.1.4",
+    "symplify/easy-coding-standard": "^12.1.14"
+  },
+  "autoload": {
+    "psr-4": {
+      "PHPIcons\\": "src/"
+    }
   }
 }

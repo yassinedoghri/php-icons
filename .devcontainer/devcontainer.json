@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/php
 {
-  "name": "PHP",
+  "name": "PHPIcons",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/php:1-8.2-bullseye",
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -23,7 +23,8 @@
         "esbenp.prettier-vscode",
         "pflannery.vscode-versionlens",
         "streetsidesoftware.code-spell-checker",
-        "yzhang.markdown-all-in-one"
+        "yzhang.markdown-all-in-one",
+        "wayou.vscode-todo-highlight"
       ]
     }
   }
