@@ -9,18 +9,13 @@ use Ahc\Cli\IO\Interactor;
 use Exception;
 use PHPIcons\Config\PHPIconsConfig;
 use PHPIcons\Config\PHPIconsConfigBuilder;
-use PHPIcons\Console\Icon;
 use PHPIcons\Console\IconData;
 use PHPIcons\Console\IconSet;
+use PHPIcons\Console\Visitors\IconsAnnotationsVisitor;
+use PHPIcons\Console\Visitors\IconsFunctionsVisitor;
 use PHPIcons\Icons;
 use PhpParser\Error;
-use PhpParser\Node;
-use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Identifier;
-use PhpParser\Node\Name;
-use PhpParser\Node\Scalar\String_;
-use PhpParser\NodeFinder;
+use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
 
 /**
@@ -247,23 +242,11 @@ class ScanCommand extends Command
             return;
         }
 
-        $nodeFinder = new NodeFinder();
-        /** @var (FuncCall|MethodCall)[] */
-        $nodes = $nodeFinder->find(
-            $ast,
-            fn (Node $node) => ($node instanceof FuncCall || $node instanceof MethodCall)
-            && ($node->name instanceof Name || $node->name instanceof Identifier)
-            && in_array($node->name->toString(), $this->config->getIdentifiers(), true)
-            && $node->getArgs() !== [] && $node->getArgs()[0]->value instanceof String_
-        );
+        $traverser = new NodeTraverser();
+        $traverser->addVisitor(new IconsFunctionsVisitor($filePath, $this->iconData, $this->config));
+        $traverser->addVisitor(new IconsAnnotationsVisitor($filePath, $this->iconData, $this->config));
 
-        foreach ($nodes as $node) {
-            /** @var String_ $strNode */
-            $strNode = $node->getArgs()[0]
-->value;
-
-            $this->iconData->addIcon(new Icon($filePath, $strNode, $this->config->getDefaultPrefix()));
-        }
+        $traverser->traverse($ast);
     }
 
     /**

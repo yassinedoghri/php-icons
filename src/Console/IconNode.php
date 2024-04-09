@@ -39,7 +39,7 @@ class IconNode
             throw new \RuntimeException('Invalid position information');
         }
 
-        $lineStartPos = strrpos($code, "\n", $filePosition - strlen($code));
+        $lineStartPos = strrpos($code, PHP_EOL, $filePosition - strlen($code));
         if ($lineStartPos === false) {
             $lineStartPos = -1;
         }
