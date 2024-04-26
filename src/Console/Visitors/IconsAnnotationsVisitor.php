@@ -7,10 +7,10 @@ namespace PHPIcons\Console\Visitors;
 use PHPIcons\Config\PHPIconsConfig;
 use PHPIcons\Console\Icon;
 use PHPIcons\Console\IconData;
+use PHPIcons\Console\IconNode;
 use PhpParser\Comment;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
-use PhpParser\Node\Scalar\String_;
 use PhpParser\NodeVisitorAbstract;
 
 class IconsAnnotationsVisitor extends NodeVisitorAbstract
@@ -53,24 +53,19 @@ class IconsAnnotationsVisitor extends NodeVisitorAbstract
                 continue;
             }
 
+            var_dump($matches);
+
+            /**
+             * @var array{0:string,1:int} $iconKeyMatch
+             */
             foreach ($matches['iconKey'] as $iconKeyMatch) {
                 $startFilePosition = $commentNode->getStartFilePos() + $iconKeyMatch[1];
                 $line = substr_count(substr($commentNode->getText(), 0, $iconKeyMatch[1]), PHP_EOL);
-                $this->iconData->addIcon(
-                    new Icon(
-                        $this->filePath,
-                        new String_(
-                            $iconKeyMatch[0],
-                            [
-                                'startLine'    => $commentNode->getStartLine() + $line,
-                                'endLine'      => $commentNode->getStartLine() + $line,
-                                'startFilePos' => $startFilePosition,
-                                'endFilePos'   => $startFilePosition + strlen($iconKeyMatch[0]),
-                            ]
-                        ),
-                        $this->config->getDefaultPrefix()
-                    )
-                );
+
+                $icon = new Icon($iconKeyMatch[0], $this->config->getDefaultPrefix());
+                $icon->addNode(new IconNode($this->filePath, $commentNode->getStartLine() + $line, $startFilePosition));
+
+                $this->iconData->addIcon($icon);
             }
         }
 

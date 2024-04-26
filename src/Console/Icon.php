@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PHPIcons\Console;
 
-use PhpParser\Node\Scalar\String_;
-
 class Icon
 {
     private string $prefix = '';
@@ -21,12 +19,8 @@ class Icon
      */
     private array $nodes = [];
 
-    public function __construct(string $filePath, String_ $node, string $defaultPrefix = '')
+    public function __construct(string $iconKey, string $defaultPrefix = '')
     {
-        $this->nodes[] = new IconNode($filePath, $node);
-
-        $iconKey = $node->value;
-
         if (str_contains($iconKey, ':')) {
             $icon = explode(':', $iconKey);
             $this->prefix = $icon[0];
@@ -38,6 +32,11 @@ class Icon
         if ($this->prefix === '') {
             $this->prefix = $defaultPrefix;
         }
+    }
+
+    public function addNode(IconNode $iconNode): void
+    {
+        $this->nodes[] = $iconNode;
     }
 
     public function merge(self $icon): void

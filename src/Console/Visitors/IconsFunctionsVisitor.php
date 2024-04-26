@@ -7,6 +7,7 @@ namespace PHPIcons\Console\Visitors;
 use PHPIcons\Config\PHPIconsConfig;
 use PHPIcons\Console\Icon;
 use PHPIcons\Console\IconData;
+use PHPIcons\Console\IconNode;
 use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
@@ -36,7 +37,12 @@ class IconsFunctionsVisitor extends NodeVisitorAbstract
             $strNode = $node->getArgs()[0]
 ->value;
 
-            $this->iconData->addIcon(new Icon($this->filePath, $strNode, $this->config->getDefaultPrefix()));
+            $icon = new Icon($strNode->value, $this->config->getDefaultPrefix());
+
+            // add +1 to StartFilePos to set the column number just after the string quote
+            $icon->addNode(new IconNode($this->filePath, $strNode->getLine(), $strNode->getStartFilePos() + 1));
+
+            $this->iconData->addIcon($icon);
         }
 
         return null;
