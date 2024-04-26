@@ -25,6 +25,13 @@ class PHPIconsConfigBuilder
 
     private string $placeholder = '�';
 
+    private ?string $defaultIcon = null;
+
+    /**
+     * @var array<string,string>
+     */
+    private array $defaultIconPerSet = [];
+
     /**
      * @var string[]
      */
@@ -39,6 +46,11 @@ class PHPIconsConfigBuilder
         $phpIconsConfig->setPaths($this->paths);
 
         $phpIconsConfig->setDefaultPrefix($this->defaultPrefix);
+
+        // must be set after default prefix to get the right prefix if default icon doesn't have one.
+        $phpIconsConfig->setDefaultIcon($this->defaultIcon);
+
+        $phpIconsConfig->setDefaultIconPerSet($this->defaultIconPerSet);
 
         $phpIconsConfig->setIdentifiers($this->identifiers);
 
@@ -68,6 +80,23 @@ class PHPIconsConfigBuilder
     public function withDefaultPrefix(string $defaultPrefix): self
     {
         $this->defaultPrefix = $defaultPrefix;
+
+        return $this;
+    }
+
+    public function withDefaultIcon(string $defaultIcon = null): self
+    {
+        $this->defaultIcon = $defaultIcon;
+
+        return $this;
+    }
+
+    /**
+     * @param array<string,string> $defaultIconPerSet
+     */
+    public function withDefaultIconPerSet(array $defaultIconPerSet = []): self
+    {
+        $this->defaultIconPerSet = $defaultIconPerSet;
 
         return $this;
     }

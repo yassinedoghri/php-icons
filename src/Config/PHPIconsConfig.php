@@ -32,6 +32,13 @@ class PHPIconsConfig
 
     private string $placeholder = '';
 
+    private ?string $defaultIcon = null;
+
+    /**
+     * @var array<string,string>
+     */
+    private array $defaultIconPerSet = [];
+
     public static function configure(): PHPIconsConfigBuilder
     {
         return new PHPIconsConfigBuilder();
@@ -92,6 +99,31 @@ class PHPIconsConfig
         $this->defaultPrefix = $defaultPrefix;
     }
 
+    public function setDefaultIcon(?string $defaultIcon): void
+    {
+        // add default prefix if none is set
+        if ($defaultIcon !== null && ! str_contains($defaultIcon, ':')) {
+            $defaultIcon = $this->defaultPrefix . ':' . $defaultIcon;
+        }
+
+        $this->defaultIcon = $defaultIcon;
+    }
+
+    /**
+     * @param array<string,string> $defaultIconPerSet
+     */
+    public function setDefaultIconPerSet(array $defaultIconPerSet): void
+    {
+        foreach ($defaultIconPerSet as $prefix => $defaultIcon) {
+            // add default prefix if none is set
+            if (! str_contains($defaultIcon, ':')) {
+                $defaultIconPerSet[$prefix] = $this->defaultPrefix . ':' . $defaultIcon;
+            }
+        }
+
+        $this->defaultIconPerSet = $defaultIconPerSet;
+    }
+
     /**
      * @param string[] $identifiers
      */
@@ -132,6 +164,19 @@ class PHPIconsConfig
     public function getDefaultPrefix(): string
     {
         return $this->defaultPrefix;
+    }
+
+    public function getDefaultIcon(): ?string
+    {
+        return $this->defaultIcon;
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    public function getDefaultIconPerSet(): array
+    {
+        return $this->defaultIconPerSet;
     }
 
     /**

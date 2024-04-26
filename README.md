@@ -174,6 +174,22 @@ echo $phpicons->icon('bolt');
 echo $phpicons->icon('material-symbols:bolt');
 ```
 
+### Default Icon
+
+`withDefaultIcon()`
+
+Default icon to use when an icon has not been found.
+
+Takes in an icon key `{prefix}:{name}`. If a prefix is not set, the default prefix will be used instead.
+
+### Default Icon Per Set
+
+`withDefaultIconPerSet([])`
+
+Default icon to use when an icon has not been found in a set.
+
+Takes in an associative array, with the key being the icon set prefix, and the value being the default icon.
+
 ### Placeholder
 
 `withPlaceholder('�')`

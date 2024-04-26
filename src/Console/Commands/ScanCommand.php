@@ -9,7 +9,9 @@ use Ahc\Cli\IO\Interactor;
 use Exception;
 use PHPIcons\Config\PHPIconsConfig;
 use PHPIcons\Config\PHPIconsConfigBuilder;
+use PHPIcons\Console\Icon;
 use PHPIcons\Console\IconData;
+use PHPIcons\Console\IconNode;
 use PHPIcons\Console\IconSet;
 use PHPIcons\Console\Visitors\IconsAnnotationsVisitor;
 use PHPIcons\Console\Visitors\IconsFunctionsVisitor;
@@ -96,6 +98,8 @@ class ScanCommand extends Command
         foreach ($filesToScan as $file) {
             $this->extractIconsFromPHPFile($file);
         }
+
+        $this->extractDefaultIconsFromConfig();
 
         foreach ($this->iconData->getIconSets() as $prefix => $iconSet) {
             if (in_array($prefix, array_keys($this->config->getLocalIconSets()), true)) {
@@ -215,6 +219,23 @@ class ScanCommand extends Command
             $iconSet->setFound();
 
             break;
+        }
+    }
+
+    private function extractDefaultIconsFromConfig(): void
+    {
+        if ($this->config->getDefaultIcon() !== null) {
+            $icon = new Icon($this->config->getDefaultIcon(), $this->config->getDefaultPrefix());
+            $icon->addNode(new IconNode($this->configFile, 1, 1));
+
+            $this->iconData->addIcon($icon);
+        }
+
+        foreach ($this->config->getDefaultIconPerSet() as $icon) {
+            $icon = new Icon($icon, $this->config->getDefaultPrefix());
+            $icon->addNode(new IconNode($this->configFile, 1, 1));
+
+            $this->iconData->addIcon($icon);
         }
     }
 

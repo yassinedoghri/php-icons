@@ -53,18 +53,35 @@ class PHPIcons implements \Stringable
             throw LibraryMisuseException::forUndefinedIcon();
         }
 
+        $iconSVG = '';
         // check if icon has already been downloaded
-        if (! array_key_exists($this->iconKey, Icons::DATA)) {
-            if ($this->config->getPlaceholder() === '') {
-                throw IconNotFoundException::forKeyNotFound($this->iconKey);
+        if (array_key_exists($this->iconKey, Icons::DATA)) {
+            $iconSVG = Icons::DATA[$this->iconKey];
+        } else { // icon was not found
+            // check if there's a default to display for the given prefix
+            if (array_key_exists($this->prefix, $this->config->getDefaultIconPerSet())) {
+                $defaultIconKey = $this->config->getDefaultIconPerSet()[$this->prefix];
+                if (array_key_exists($defaultIconKey, Icons::DATA)) {
+                    $iconSVG = Icons::DATA[$defaultIconKey];
+                }
+            } elseif ($this->config->getDefaultIcon() !== null) {
+                // no default for the prefix
+                // check if there's a default icon set
+                if (array_key_exists($this->config->getDefaultIcon(), Icons::DATA)) {
+                    $iconSVG = Icons::DATA[$this->config->getDefaultIcon()];
+                }
             }
 
-            return '<span title="' . htmlspecialchars(
-                sprintf('"%s" icon not found.', $this->iconKey)
-            ) . '">' . $this->config->getPlaceholder() . '</span>';
-        }
+            if ($iconSVG === '') {
+                if ($this->config->getPlaceholder() === '') {
+                    throw IconNotFoundException::forKeyNotFound($this->iconKey);
+                }
 
-        $iconSVG = Icons::DATA[$this->iconKey];
+                return '<span title="' . htmlspecialchars(
+                    sprintf('"%s" icon not found.', $this->iconKey)
+                ) . '">' . $this->config->getPlaceholder() . '</span>';
+            }
+        }
 
         if ($this->attributes !== []) {
             $iconSVG = $this->injectAttributes($iconSVG);

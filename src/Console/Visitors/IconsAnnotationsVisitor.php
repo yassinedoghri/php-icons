@@ -53,8 +53,6 @@ class IconsAnnotationsVisitor extends NodeVisitorAbstract
                 continue;
             }
 
-            var_dump($matches);
-
             /**
              * @var array{0:string,1:int} $iconKeyMatch
              */
