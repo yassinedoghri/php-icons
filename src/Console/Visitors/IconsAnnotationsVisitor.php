@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PHPIcons\Console\Visitors;
 
 use PHPIcons\Config\PHPIconsConfig;
@@ -28,7 +30,7 @@ class IconsAnnotationsVisitor extends NodeVisitorAbstract
     public function enterNode(Node $node)
     {
         foreach ($node->getComments() as $nodeComment) {
-            if (! in_array($nodeComment, $this->comments)) {
+            if (! in_array($nodeComment, $this->comments, true)) {
                 $this->comments = [...$this->comments, $nodeComment];
             }
         }

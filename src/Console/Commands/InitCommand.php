@@ -12,11 +12,11 @@ use Ahc\Cli\IO\Interactor;
  */
 class InitCommand extends Command
 {
-    private bool $confirmOverwrite;
-
     public function __construct()
     {
         parent::__construct('init', 'Configure PHPIcons interactively');
+
+        $this->option('-c --config-file', 'Config file path', null, CLIENT_ROOTPATH . 'php-icons.php');
     }
 
     public function interact(Interactor $io): void
@@ -24,16 +24,17 @@ class InitCommand extends Command
         $this->writer()
             ->eol();
         $this->writer()
-            ->bold('Initializing PHPIcons', true);
+            ->bold('Initializing PHPIcons');
+        $this->writer()
+            ->eol(2);
     }
 
     public function execute(): int
     {
+        $this->writer()
+            ->info('Generating Icons class to cache icons…');
         // create Icons class if it doesn't exist
         if (! file_exists(dirname(__DIR__, 2) . '/Icons.php')) {
-            $this->writer()
-                ->info('Generating Icons class to cache icons SVGs… ');
-
             if (! copy(
                 dirname(__DIR__, 1) . '/Templates/IconsClass.template.php',
                 dirname(__DIR__, 2) . '/Icons.php'
@@ -47,39 +48,42 @@ class InitCommand extends Command
             }
 
             $this->writer()
-                ->bold('Done!', true);
+                ->ok(' done!');
+        } else {
+            $this->writer()
+                ->bold(' skipped!', true);
+            $this->writer()
+                ->white('Icons class already exists.');
         }
 
-        $this->confirmOverwrite = true;
-
-        $configPathValidator = function ($value) {
-            $dirExists = is_dir(dirname($value));
-
-            if (! $dirExists) {
-                throw new \InvalidArgumentException('Config file must live in a valid directory.');
-            }
-
-            if (! str_ends_with($value, '.php')) {
-                throw new \InvalidArgumentException('Config file must end with .php extension.');
-            }
-
-            return $value;
-        };
-
         $this->writer()
-            ->eol();
-        $this->set('configFile', $this->io()->prompt('Config file path', './php-icons.php', $configPathValidator, 5));
-
+            ->eol(2);
+        $this->writer()
+            ->info(sprintf('Generating config file (%s)…', $this->configFile));
         // check that file doesn't already exist
         if (file_exists($this->configFile)) {
             $this->writer()
-                ->eol();
-            $this->confirmOverwrite = $this->io()
-                ->confirm('Config file already exists, do you want to overwrite it?', 'n');
+                ->bold(' skipped!', true);
+            $this->writer()
+                ->white('Config file already exists.');
+            $this->writer()
+                ->eol(2);
+
+            return 0;
         }
 
-        if (! $this->confirmOverwrite) {
-            return 0;
+        $this->writer()
+            ->eol();
+
+        // check that config file path is ok
+        $dirExists = is_dir(dirname($this->configFile));
+
+        if (! $dirExists) {
+            throw new \InvalidArgumentException('Config file must live in a valid directory.');
+        }
+
+        if (! str_ends_with($this->configFile, '.php')) {
+            throw new \InvalidArgumentException('Config file must end with .php extension.');
         }
 
         $configTemplate = file_get_contents(__DIR__ . '/../Templates/Config.template.php');
@@ -120,7 +124,7 @@ class InitCommand extends Command
         $this->writer()
             ->eol();
         $this->writer()
-            ->ok(sprintf('[OK] PHPIcons initialized in %s', realpath($this->configFile)), true);
+            ->ok(sprintf('[OK] PHPIcons initialized with config %s', realpath($this->configFile)), true);
         $this->writer()
             ->eol();
 
