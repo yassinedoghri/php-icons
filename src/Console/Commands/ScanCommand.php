@@ -48,8 +48,9 @@ class ScanCommand extends Command
     }
 
     // This method is auto called before `self::execute()` and receives `Interactor $io` instance
-    public function interact(Interactor $io): void
-    {
+    public function interact(
+        Interactor $io
+    ): void {
         $this->writer()
             ->eol();
 
@@ -194,7 +195,10 @@ class ScanCommand extends Command
             }
 
             /** @var ?array{prefix:string,lastModified:int,width?:int,height?:int,icons:array<string,array{width?:int,height?:int,body:int}>,not_found:string[]} */
-            $result = json_decode($response, true);
+            $result = json_decode(
+                $response,
+                true
+            );
 
             if ($result === null) {
                 $this->writer()
@@ -295,7 +299,9 @@ class ScanCommand extends Command
         }
 
         // filter out non php files and duplicates
-        return array_unique(array_filter($filesToScan, fn ($path) => str_ends_with($path, '.php')));
+        return array_unique(
+            array_filter($filesToScan, fn ($path) => str_ends_with($path, '.php'))
+        );
     }
 
     private function writeIcons(): bool

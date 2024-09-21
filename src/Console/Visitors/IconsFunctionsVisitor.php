@@ -40,7 +40,9 @@ class IconsFunctionsVisitor extends NodeVisitorAbstract
             $icon = new Icon($strNode->value, $this->config->getDefaultPrefix());
 
             // add +1 to StartFilePos to set the column number just after the string quote
-            $icon->addNode(new IconNode($this->filePath, $strNode->getLine(), $strNode->getStartFilePos() + 1));
+            $icon->addNode(
+                new IconNode($this->filePath, $strNode->getLine(), $strNode->getStartFilePos() + 1)
+            );
 
             $this->iconData->addIcon($icon);
         }

@@ -61,7 +61,9 @@ class IconsAnnotationsVisitor extends NodeVisitorAbstract
                 $line = substr_count(substr($commentNode->getText(), 0, $iconKeyMatch[1]), PHP_EOL);
 
                 $icon = new Icon($iconKeyMatch[0], $this->config->getDefaultPrefix());
-                $icon->addNode(new IconNode($this->filePath, $commentNode->getStartLine() + $line, $startFilePosition));
+                $icon->addNode(
+                    new IconNode($this->filePath, $commentNode->getStartLine() + $line, $startFilePosition)
+                );
 
                 $this->iconData->addIcon($icon);
             }

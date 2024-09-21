@@ -9,7 +9,11 @@ class PHPIconsConfigBuilder
     /**
      * @var string[]
      */
-    private array $apiHosts = ['https://api.iconify.design', 'https://api.simplesvg.com', 'https://api.unisvg.com'];
+    private array $apiHosts = [
+        'https://api.iconify.design',
+        'https://api.simplesvg.com',
+        'https://api.unisvg.com',
+    ];
 
     /**
      * @var string[]
@@ -48,7 +52,9 @@ class PHPIconsConfigBuilder
         $phpIconsConfig->setDefaultPrefix($this->defaultPrefix);
 
         // must be set after default prefix to get the right prefix if default icon doesn't have one.
-        $phpIconsConfig->setDefaultIcon($this->defaultIcon);
+        $phpIconsConfig->setDefaultIcon(
+            $this->defaultIcon
+        );
 
         $phpIconsConfig->setDefaultIconPerSet($this->defaultIconPerSet);
 
@@ -94,8 +100,9 @@ class PHPIconsConfigBuilder
     /**
      * @param array<string,string> $defaultIconPerSet
      */
-    public function withDefaultIconPerSet(array $defaultIconPerSet = []): self
-    {
+    public function withDefaultIconPerSet(
+        array $defaultIconPerSet = []
+    ): self {
         $this->defaultIconPerSet = $defaultIconPerSet;
 
         return $this;
@@ -104,8 +111,9 @@ class PHPIconsConfigBuilder
     /**
      * @param string|string[] $identifiers
      */
-    public function withIdentifiers(string|array $identifiers): self
-    {
+    public function withIdentifiers(
+        string|array $identifiers
+    ): self {
         $this->identifiers = is_array($identifiers) ? $identifiers : explode(',', $identifiers);
 
         return $this;
@@ -121,8 +129,9 @@ class PHPIconsConfigBuilder
     /**
      * @param array<string,string> $localIconSets
      */
-    public function withLocalIconSets(array $localIconSets): self
-    {
+    public function withLocalIconSets(
+        array $localIconSets
+    ): self {
         $this->localIconSets = $localIconSets;
 
         return $this;
