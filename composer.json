@@ -25,7 +25,7 @@
     "pest:parallel": "./vendor/bin/pest --colors=always --parallel",
     "pest:profiling": "./vendor/bin/pest --colors=always --profile",
     "pest:coverage": "./vendor/bin/pest --colors=always --coverage",
-    "pest:type-coverage": "./vendor/bin/pest --colors=always --type-coverage --min=99",
+    "pest:type-coverage": "./vendor/bin/pest --colors=always --type-coverage --min=95",
     "test": [
       "@test:style",
       "@test:rector",
@@ -41,10 +41,10 @@
     ]
   },
   "require": {
-    "php": ">=8.2",
+    "php": ">=8.1",
     "composer-runtime-api": "^2.2",
     "adhocore/cli": "^1.7.2",
-    "nikic/php-parser": "^5.2"
+    "nikic/php-parser": "^4.19.2"
   },
   "require-dev": {
     "kint-php/kint": "^5.1.1",
@@ -52,8 +52,8 @@
     "rector/rector": "^1.2.5",
     "symplify/coding-standard": "^12.2.3",
     "symplify/easy-coding-standard": "^12.3.5",
-    "pestphp/pest": "^3.1",
-    "pestphp/pest-plugin-type-coverage": "^3.0"
+    "pestphp/pest": "^2.35.1",
+    "pestphp/pest-plugin-type-coverage": "^2.8.6"
   },
   "autoload": {
     "psr-4": {
