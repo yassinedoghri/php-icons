@@ -21,10 +21,11 @@
         "breezelin.phpstan",
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
+        "GitHub.vscode-github-actions",
         "pflannery.vscode-versionlens",
         "streetsidesoftware.code-spell-checker",
-        "yzhang.markdown-all-in-one",
-        "wayou.vscode-todo-highlight"
+        "wayou.vscode-todo-highlight",
+        "yzhang.markdown-all-in-one"
       ]
     }
   }
