@@ -62,7 +62,7 @@ _Note: All contributions will be licensed under the project's license._
 
 - **Promptly address any CI failures**. If your pull request fails to build or pass tests, please push another commit to fix it.
 
-- **Follow the follow [pull request template](./.github/PULL_REQUEST_TEMPLATE.md)**
+- **Follow the [pull request template](./.github/PULL_REQUEST_TEMPLATE.md)**
 
 - When writing comments, use properly constructed sentences, including punctuation.
 
