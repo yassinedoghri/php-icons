@@ -162,7 +162,6 @@ composer rector
 
 By making a contribution to this project, I certify that I agree to the [Developer's Certificate of Origin 1.1](https://developercertificate.org/):
 
-To confirm that you have read this guide and are following it as best as possible, **include this emoji at the top** of your issue or pull request: 🍱
 
 ---
 
