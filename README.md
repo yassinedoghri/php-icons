@@ -1,10 +1,10 @@
 # PHPIcons 🐘 🙂
 
-[![Latest Stable Version](http://poser.pugx.org/yassinedoghri/php-icons/v)](https://packagist.org/packages/yassinedoghri/php-icons)
-[![Total Downloads](http://poser.pugx.org/yassinedoghri/php-icons/downloads)](https://packagist.org/packages/yassinedoghri/php-icons)
-[![Latest Unstable Version](http://poser.pugx.org/yassinedoghri/php-icons/v/unstable)](https://packagist.org/packages/yassinedoghri/php-icons)
+[![Latest Stable Version](https://poser.pugx.org/yassinedoghri/php-icons/v)](https://packagist.org/packages/yassinedoghri/php-icons)
+[![Total Downloads](https://poser.pugx.org/yassinedoghri/php-icons/downloads)](https://packagist.org/packages/yassinedoghri/php-icons)
+[![Latest Unstable Version](https://poser.pugx.org/yassinedoghri/php-icons/v/unstable)](https://packagist.org/packages/yassinedoghri/php-icons)
 [![License](https://img.shields.io/github/license/yassinedoghri/php-icons?color=green)](https://packagist.org/packages/yassinedoghri/php-icons)
-[![PHP Version Require](http://poser.pugx.org/yassinedoghri/php-icons/require/php)](https://packagist.org/packages/yassinedoghri/php-icons)
+[![PHP Version Require](https://poser.pugx.org/yassinedoghri/php-icons/require/php)](https://packagist.org/packages/yassinedoghri/php-icons)
 
 **A convenient PHP library to render svg icons.**
 

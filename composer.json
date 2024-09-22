@@ -1,6 +1,5 @@
 {
   "name": "yassinedoghri/php-icons",
-  "version": "1.0.0-dev",
   "description": "A PHP library based on iconify's API to download and render svg icons from popular open source icon sets.",
   "type": "library",
   "license": "MIT",

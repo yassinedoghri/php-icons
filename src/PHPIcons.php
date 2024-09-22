@@ -55,6 +55,7 @@ class PHPIcons implements \Stringable
 
         $iconSVG = '';
         // check if icon has already been downloaded
+        // @phpstan-ignore-next-line
         if (array_key_exists($this->iconKey, Icons::DATA)) {
             $iconSVG = Icons::DATA[$this->iconKey];
         } else { // icon was not found
@@ -119,7 +120,6 @@ class PHPIcons implements \Stringable
             throw LibraryMisuseException::forEmptyPrefix($this->icon);
         }
 
-        // @phpstan-ignore-next-line
         $this->iconKey = $this->prefix . ':' . $this->icon;
 
         return $this;
