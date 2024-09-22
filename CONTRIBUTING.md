@@ -160,8 +160,7 @@ composer rector
 
 ## 🏅 Contributor Agreement
 
-By making a contribution to this project, I certify that I agree to the [Developer's Certificate of Origin 1.1](https://developercertificate.org/):
-
+By making a contribution to this project, I certify that I agree to the [Developer's Certificate of Origin 1.1](https://developercertificate.org/).
 
 ---
 
