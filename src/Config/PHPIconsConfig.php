@@ -69,9 +69,8 @@ class PHPIconsConfig
     /**
      * @param array<string,string> $localIconSets
      */
-    public function setLocalIconSets(
-        array $localIconSets
-    ): void {
+    public function setLocalIconSets(array $localIconSets): void
+    {
         foreach ($localIconSets as $prefix => $path) {
             if (! is_dir($path)) {
                 throw new Exception(sprintf('Local icon set "%s" directory not found in %s', $prefix, $path));
@@ -113,9 +112,8 @@ class PHPIconsConfig
     /**
      * @param array<string,string> $defaultIconPerSet
      */
-    public function setDefaultIconPerSet(
-        array $defaultIconPerSet
-    ): void {
+    public function setDefaultIconPerSet(array $defaultIconPerSet): void
+    {
         foreach ($defaultIconPerSet as $prefix => $defaultIcon) {
             // add default prefix if none is set
             if (! str_contains($defaultIcon, ':')) {

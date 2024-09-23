@@ -8,10 +8,8 @@ if (! function_exists('glob_recursive')) {
      *
      * @return string[]|false
      */
-    function glob_recursive(
-        string $pattern,
-        int $flags = 0
-    ): array|false {
+    function glob_recursive(string $pattern, int $flags = 0): array|false
+    {
         $files = glob($pattern, $flags);
 
         if (! $files) {
@@ -45,9 +43,8 @@ if (! function_exists('varexport')) {
      * NOTE: The only issue is when a string value has `=>\n[`, it will get converted to `=> [`
      * @link https://www.php.net/manual/en/function.var-export.php
      */
-    function varexport(
-        mixed $expression
-    ): string {
+    function varexport(mixed $expression): string
+    {
         $export = var_export($expression, true);
         $patterns = [
             "/array \(/"                       => '[',

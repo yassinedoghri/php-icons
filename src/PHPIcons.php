@@ -60,10 +60,7 @@ class PHPIcons implements \Stringable
             $iconSVG = Icons::DATA[$this->iconKey];
         } else { // icon was not found
             // check if there's a default to display for the given prefix
-            if (array_key_exists(
-                $this->prefix,
-                $this->config->getDefaultIconPerSet()
-            )) {
+            if (array_key_exists($this->prefix, $this->config->getDefaultIconPerSet())) {
                 $defaultIconKey = $this->config->getDefaultIconPerSet()[$this->prefix];
                 if (array_key_exists($defaultIconKey, Icons::DATA)) {
                     $iconSVG = Icons::DATA[$defaultIconKey];
@@ -71,10 +68,7 @@ class PHPIcons implements \Stringable
             } elseif ($this->config->getDefaultIcon() !== null) {
                 // no default for the prefix
                 // check if there's a default icon set
-                if (array_key_exists(
-                    $this->config->getDefaultIcon(),
-                    Icons::DATA
-                )) {
+                if (array_key_exists($this->config->getDefaultIcon(), Icons::DATA)) {
                     $iconSVG = Icons::DATA[$this->config->getDefaultIcon()];
                 }
             }
