@@ -153,7 +153,7 @@ composer core:update
 ✅ Run refactors using [**Rector**](https://getrector.com/documentation)
 
 ```bash
-composer rector
+composer rector:fix
 ```
 
 </details>

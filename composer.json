@@ -27,8 +27,8 @@
     "pest:coverage": "./vendor/bin/pest --colors=always --coverage",
     "pest:type-coverage": "./vendor/bin/pest --colors=always --type-coverage --min=95",
     "test": [
-      "@test:style",
-      "@test:rector",
+      "@style",
+      "@rector",
       "@phpstan",
       "@pest:type-coverage",
       "@pest:parallel"
@@ -64,5 +64,7 @@
     "allow-plugins": {
       "pestphp/pest-plugin": true
     }
-  }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
