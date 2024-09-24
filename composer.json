@@ -21,7 +21,7 @@
     "rector:fix": "vendor/bin/rector process --ansi",
     "style": "vendor/bin/ecs check --ansi",
     "style:fix": "vendor/bin/ecs check --fix --ansi",
-    "pest": "./vendor/bin/pest --stop-on-defect --colors=always",
+    "pest": "./vendor/bin/pest --bail --colors=always",
     "pest:parallel": "./vendor/bin/pest --colors=always --parallel",
     "pest:profiling": "./vendor/bin/pest --colors=always --profile",
     "pest:coverage": "./vendor/bin/pest --colors=always --coverage",
@@ -56,8 +56,16 @@
     "pestphp/pest-plugin-type-coverage": "^2.8.6"
   },
   "autoload": {
+    "files": [
+      "src/console/helpers.php"
+    ],
     "psr-4": {
       "PHPIcons\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
     }
   },
   "config": {
