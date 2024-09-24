@@ -5,3 +5,5 @@ parameters:
 		- tests
 	dynamicConstantNames:
 		- \PHPIcons\Icons::DATA
+	ignoreErrors:
+		- '#Call to an undefined method Pest\\PendingCalls\\TestCall\:\:expect\(\)#'
