@@ -6,7 +6,6 @@ namespace PHPIcons\Console\Commands;
 
 use Ahc\Cli\Input\Command;
 use Ahc\Cli\IO\Interactor;
-use DateTime;
 use Exception;
 use PHPIcons\Config\PHPIconsConfig;
 use PHPIcons\Config\PHPIconsConfigBuilder;
@@ -59,7 +58,6 @@ class ScanCommand extends Command
 
         // if false, then file does not exist
         if (file_exists($this->configFile)) {
-            
             /** @var PHPIconsConfigBuilder $configBuilder */
             $configBuilder = require $this->configFile;
 
@@ -151,7 +149,7 @@ class ScanCommand extends Command
 
         foreach ($iconSet->getIconNames() as $iconName) {
             $contents = file_get_contents($localPath . '/' . $iconName . '.svg');
-            
+
             if ($contents !== false) {
                 $iconSet->setIconFound($iconName, $contents);
             }
@@ -213,6 +211,7 @@ class ScanCommand extends Command
                     $height,
                     $data['body']
                 );
+
                 $iconSet->setIconFound($iconName, $svg);
             }
 

@@ -57,7 +57,7 @@
   },
   "autoload": {
     "files": [
-      "src/console/helpers.php"
+      "src/Console/helpers.php"
     ],
     "psr-4": {
       "PHPIcons\\": "src/"
