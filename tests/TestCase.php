@@ -16,5 +16,9 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        // cleanup: delete Icons.php to start fresh ✨
+        // add @ to discard "No such file or directory" warning if file does not exist
+        @unlink(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Icons.php');
     }
 }

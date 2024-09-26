@@ -7,7 +7,7 @@ use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
 use Rector\Php80\Rector\Class_\StringableForToStringRector;
 
 return RectorConfig::configure()
-    ->withPaths([__DIR__ . '/src', __DIR__ . '/tests'])
+    ->withPaths([__DIR__ . DIRECTORY_SEPARATOR . 'src', __DIR__ . DIRECTORY_SEPARATOR . 'tests'])
     ->withPhpSets(php81: true)
     ->withPreparedSets(deadCode: true, codeQuality: true)
     ->withSkip([
