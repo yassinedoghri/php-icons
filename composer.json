@@ -16,28 +16,63 @@
   ],
   "scripts": {
     "dev": "php -S 0.0.0.0:8000",
-    "analyse": "vendor/bin/phpstan analyse --ansi",
+    "phpstan": "vendor/bin/phpstan analyse --ansi",
     "rector": "vendor/bin/rector process --dry-run --ansi",
     "rector:fix": "vendor/bin/rector process --ansi",
     "style": "vendor/bin/ecs check --ansi",
-    "style:fix": "vendor/bin/ecs check --fix --ansi"
+    "style:fix": "vendor/bin/ecs check --fix --ansi",
+    "pest": "./vendor/bin/pest --bail --colors=always",
+    "pest:parallel": "./vendor/bin/pest --colors=always --parallel",
+    "pest:profiling": "./vendor/bin/pest --colors=always --profile",
+    "pest:coverage": "./vendor/bin/pest --colors=always --coverage",
+    "pest:type-coverage": "./vendor/bin/pest --colors=always --type-coverage --min=95",
+    "test": [
+      "@style",
+      "@rector",
+      "@phpstan",
+      "@pest:type-coverage",
+      "@pest:parallel"
+    ],
+    "core:update": [
+      "composer update --no-interaction --prefer-stable",
+      "composer bump --ansi",
+      "composer validate --strict --ansi",
+      "composer audit --ansi"
+    ]
   },
   "require": {
     "php": ">=8.1",
     "composer-runtime-api": "^2.2",
-    "adhocore/cli": "^v1.7.1",
-    "nikic/php-parser": "^v4.0"
+    "adhocore/cli": "^1.7.2",
+    "nikic/php-parser": "^4.19.2"
   },
   "require-dev": {
     "kint-php/kint": "^5.1.1",
-    "phpstan/phpstan": "^1.10.67",
-    "rector/rector": "^1.0.4",
-    "symplify/coding-standard": "^12.1.4",
-    "symplify/easy-coding-standard": "^12.1.14"
+    "phpstan/phpstan": "^1.12.4",
+    "rector/rector": "^1.2.5",
+    "symplify/coding-standard": "^12.2.3",
+    "symplify/easy-coding-standard": "^12.3.5",
+    "pestphp/pest": "^2.35.1",
+    "pestphp/pest-plugin-type-coverage": "^2.8.6"
   },
   "autoload": {
+    "files": [
+      "src/Console/helpers.php"
+    ],
     "psr-4": {
       "PHPIcons\\": "src/"
     }
-  }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }

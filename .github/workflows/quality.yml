@@ -39,6 +39,4 @@ jobs:
 
       - name: ✨ Quality check
         run: |
-          composer run-script style
-          composer run-script analyse
-          composer run-script rector
+          composer run-script test

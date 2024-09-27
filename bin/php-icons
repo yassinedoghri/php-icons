@@ -10,7 +10,6 @@ if (!defined('COMPOSER_BIN_DIR')) {
 }
 
 require __DIR__ . '/../src/Console/Constants.php';
-require __DIR__ . '/../src/Console/helpers.php';
 
 require COMPOSER_AUTOLOAD_PATH;
 
