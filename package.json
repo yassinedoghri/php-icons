@@ -1,0 +1,35 @@
+{
+  "name": "php-icons",
+  "version": "0.0.0-development",
+  "description": "A PHP library based on iconify's API to download and render svg icons from popular open source icon sets.",
+  "private": true,
+  "author": {
+    "name": "Yassine Doghri",
+    "email": "yassine@doghri.fr",
+    "url": "https://yassinedoghri.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yassinedoghri/php-icons.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "commit": "cz"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "prettier": "^3.3.3",
+    "semantic-release": "^24.1.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

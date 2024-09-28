@@ -3,13 +3,19 @@
 {
   "name": "PHPIcons",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/php:1-8.2-bullseye",
+  "build": {
+    "context": ".",
+    "dockerfile": "Dockerfile"
+  },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [8000],
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
-    "ghcr.io/devcontainers/features/git:1": {}
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}
   },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "composer install && pnpm install",
   "customizations": {
     "vscode": {
       "settings": {
@@ -29,10 +35,4 @@
       ]
     }
   }
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
-
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
 }

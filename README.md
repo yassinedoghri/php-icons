@@ -8,7 +8,9 @@
 
 **A convenient PHP library to render svg icons.**
 
-Get access to over 200,000 icons from more than [150 open source icon sets](https://icon-sets.iconify.design/) directly from your php files!
+Get access to over 200,000 icons from more than
+[150 open source icon sets](https://icon-sets.iconify.design/) directly from
+your php files!
 
 Thanks to [Iconify](https://iconify.design/) ❤️
 
@@ -28,16 +30,20 @@ Run the following command to initialize the configuration file:
 vendor/bin/php-icons init
 ```
 
-This will prompt you to create a `php-icons.php` config file in the root of your project. See [config reference](#⚙️-config-reference) for more info.
+This will prompt you to create a `php-icons.php` config file in the root of your
+project. See [config reference](#⚙️-config-reference) for more info.
 
 ### 3. Use anywhere
 
 #### 3.1. `icon(string $iconKey)` method
 
-Use the `icon` method in your view files with the icon key string (`{prefix}:{icon}`) as parameter:
+Use the `icon` method in your view files with the icon key string
+(`{prefix}:{icon}`) as parameter:
 
-- `{prefix}`: is the [icon set prefix](https://iconify.design/docs/icons/icon-set-basics.html#naming)
-- `{name}`: is the [icon name](https://iconify.design/docs/icons/icon-basics.html#icon-names)
+- `{prefix}`: is the
+  [icon set prefix](https://iconify.design/docs/icons/icon-set-basics.html#naming)
+- `{name}`: is the
+  [icon name](https://iconify.design/docs/icons/icon-basics.html#icon-names)
 
 ```php
 <?php
@@ -70,8 +76,8 @@ echo $phpicons
 // <svg class="text-2xl" style="color: yellow;" […]>…</svg>
 ```
 
-> [!TIP]
-> Find and copy the icon keys of popular open source icon sets from [Iconify's index](https://icon-sets.iconify.design/).
+> [!TIP] Find and copy the icon keys of popular open source icon sets from
+> [Iconify's index](https://icon-sets.iconify.design/).
 
 #### 3.2. Scan source files and load icons
 
@@ -85,7 +91,8 @@ vendor/bin/php-icons scan
 
 ## ⚙️ Config reference
 
-Your config file is used by both the `php-icons` CLI tool and PHPIcons class, it should look like this:
+Your config file is used by both the `php-icons` CLI tool and PHPIcons class, it
+should look like this:
 
 ```php
 <?php
@@ -106,26 +113,31 @@ return PHPIconsConfig::configure()
 
 `withPaths([])`
 
-List of paths to your source files. PHP files will be parsed and scanned for discovering the icons you have defined.
+List of paths to your source files. PHP files will be parsed and scanned for
+discovering the icons you have defined.
 
 ### API Hosts
 
 `withAPIHosts([])`
 
-[Iconify API](https://iconify.design/docs/api/) hosts to query for downloading svg icons. Starts by querying the first host, the rest is used as backup.
+[Iconify API](https://iconify.design/docs/api/) hosts to query for downloading
+svg icons. Starts by querying the first host, the rest is used as backup.
 
-Defaults to Iconify's public hosts: `["https://api.iconify.design","https://api.simplesvg.com", "https://api.unisvg.com"]`
+Defaults to Iconify's public hosts:
+`["https://api.iconify.design","https://api.simplesvg.com", "https://api.unisvg.com"]`
 
 ### Local Icon Sets
 
 `withLocalIconSets([])`
 
-If you have custom icons, php-icons can look them up locally in your file system instead of calling for the [Iconify API](https://iconify.design/docs/api/).
+If you have custom icons, php-icons can look them up locally in your file system
+instead of calling for the [Iconify API](https://iconify.design/docs/api/).
 
 > [!IMPORTANT]  
 > php-icons will look for `{name}.svg` files in your local icon sets
 
-Takes in an associative array with the icon set prefix as the key and its path as value.
+Takes in an associative array with the icon set prefix as the key and its path
+as value.
 
 #### Example
 
@@ -180,7 +192,8 @@ echo $phpicons->icon('material-symbols:bolt');
 
 Default icon to use when an icon has not been found.
 
-Takes in an icon key `{prefix}:{name}`. If a prefix is not set, the default prefix will be used instead.
+Takes in an icon key `{prefix}:{name}`. If a prefix is not set, the default
+prefix will be used instead.
 
 ### Default Icon Per Set
 
@@ -188,7 +201,8 @@ Takes in an icon key `{prefix}:{name}`. If a prefix is not set, the default pref
 
 Default icon to use when an icon has not been found in a set.
 
-Takes in an associative array, with the key being the icon set prefix, and the value being the default icon.
+Takes in an associative array, with the key being the icon set prefix, and the
+value being the default icon.
 
 ### Placeholder
 
@@ -202,7 +216,8 @@ Defaults to `�` (REPLACEMENT CHARACTER).
 
 `withIdentifiers([])`
 
-Function or method names to match for identifying icon keys in your source files.
+Function or method names to match for identifying icon keys in your source
+files.
 
 Defaults to `['icon']`.
 
@@ -233,12 +248,17 @@ Run `<command> --help` for specific help
 
 ## ❤️ Acknowledgments
 
-This wouldn't have been possible without the awesome work from the [Iconify](https://iconify.design/) team and designers that maintain [the many open source icon sets](https://icon-sets.iconify.design/).
+This wouldn't have been possible without the awesome work from the
+[Iconify](https://iconify.design/) team and designers that maintain
+[the many open source icon sets](https://icon-sets.iconify.design/).
 
-Inspired by [astro-icon](https://www.astroicon.dev/), [blade-icons](https://blade-ui-kit.com/blade-icons) and [rector](https://getrector.com/).
+Inspired by [astro-icon](https://www.astroicon.dev/),
+[blade-icons](https://blade-ui-kit.com/blade-icons) and
+[rector](https://getrector.com/).
 
 ## 📜 License
 
 Code released under the [MIT License](https://choosealicense.com/licenses/mit/).
 
-Copyright (c) 2024-present, Yassine Doghri ([@yassinedoghri](https://yassinedoghri.com/)).
+Copyright (c) 2024-present, Yassine Doghri
+([@yassinedoghri](https://yassinedoghri.com/)).

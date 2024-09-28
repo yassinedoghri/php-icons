@@ -1,0 +1,87 @@
+name: php-icons-release
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: ✅ Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: 🗂️ Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: 📥 Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: ✨ Quality check
+        run: |
+          composer validate --strict --ansi
+          composer run-script style
+          composer run-script phpstan
+          composer run-script rector
+          composer run-script pest:type-coverage
+
+      - name: 🧪 Run tests and collect coverage
+        run: vendor/bin/pest --parallel --coverage-clover coverage.xml
+
+      - name: 📤 Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [quality]
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN_SEMANTIC_RELEASE }}
+
+      - name: 📥 Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: ⚙️ Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: 🚀 Run Semantic Release
+        run: |
+          pnpm install
+          pnpx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -24,12 +24,12 @@
     "pest": "./vendor/bin/pest --bail --colors=always",
     "pest:parallel": "./vendor/bin/pest --colors=always --parallel",
     "pest:profiling": "./vendor/bin/pest --colors=always --profile",
-    "pest:coverage": "./vendor/bin/pest --colors=always --coverage",
+    "pest:coverage": "./vendor/bin/pest --colors=always --parallel --coverage",
     "pest:type-coverage": "./vendor/bin/pest --colors=always --type-coverage --min=95",
     "test": [
       "@style",
-      "@rector",
       "@phpstan",
+      "@rector",
       "@pest:type-coverage",
       "@pest:parallel"
     ],
