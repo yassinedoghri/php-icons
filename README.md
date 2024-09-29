@@ -1,18 +1,28 @@
+<div align="center">
+
 # PHPIcons 🐘 🙂
+
+**A convenient PHP library to render svg icons.**
 
 [![Latest Stable Version](https://poser.pugx.org/yassinedoghri/php-icons/v)](https://packagist.org/packages/yassinedoghri/php-icons)
 [![Total Downloads](https://poser.pugx.org/yassinedoghri/php-icons/downloads)](https://packagist.org/packages/yassinedoghri/php-icons)
-[![Latest Unstable Version](https://poser.pugx.org/yassinedoghri/php-icons/v/unstable)](https://packagist.org/packages/yassinedoghri/php-icons)
+[![codecov](https://codecov.io/gh/yassinedoghri/php-icons/graph/badge.svg?token=P8CG7J5HOQ)](https://codecov.io/gh/yassinedoghri/php-icons)
 [![License](https://img.shields.io/github/license/yassinedoghri/php-icons?color=green)](https://packagist.org/packages/yassinedoghri/php-icons)
 [![PHP Version Require](https://poser.pugx.org/yassinedoghri/php-icons/require/php)](https://packagist.org/packages/yassinedoghri/php-icons)
 
-**A convenient PHP library to render svg icons.**
+</div>
 
 Get access to over 200,000 icons from more than
 [150 open source icon sets](https://icon-sets.iconify.design/) directly from
 your php files!
 
 Thanks to [Iconify](https://iconify.design/) ❤️
+
+## 🧩 Integrations
+
+| Framework                                | Home                                                                                  | Description                                                                                                                                             |
+| ---------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [CodeIgniter4](https://codeigniter.com/) | [yassinedoghri/codeigniter-icons](https://github.com/yassinedoghri/codeigniter-icons) | A CodeIgniter4 library with convenient helper functions to render svg icons using [yassinedoghri/php-icons](https://github.com/yassinedoghri/php-icons) |
 
 ## 🚀 Getting started
 
@@ -76,7 +86,8 @@ echo $phpicons
 // <svg class="text-2xl" style="color: yellow;" […]>…</svg>
 ```
 
-> [!TIP] Find and copy the icon keys of popular open source icon sets from
+> [!TIP]  
+> Find and copy the icon keys of popular open source icon sets from
 > [Iconify's index](https://icon-sets.iconify.design/).
 
 #### 3.2. Scan source files and load icons
