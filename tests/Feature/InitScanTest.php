@@ -14,9 +14,8 @@ it('can init PHPIcons, scan PHP files and load icons', function () {
 
     $iconsFilePath = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Icons.php';
 
-    // add @ to discard "No such file or directory" warning
-    $iconsContents = @file_get_contents($iconsFilePath);
-    expect($iconsContents)
+    $iconsExists = file_exists($iconsFilePath);
+    expect($iconsExists)
         ->toBe(false); // Icons.php does not exist yet
 
     // Initialize the PHPIcons configuration

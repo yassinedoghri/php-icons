@@ -13,12 +13,8 @@ use PHPIcons\Console\Icon;
 use PHPIcons\Console\IconData;
 use PHPIcons\Console\IconNode;
 use PHPIcons\Console\IconSet;
-use PHPIcons\Console\Visitors\IconsAnnotationsVisitor;
-use PHPIcons\Console\Visitors\IconsFunctionsVisitor;
+use PHPIcons\Console\PhpParser;
 use PHPIcons\Icons;
-use PhpParser\Error;
-use PhpParser\NodeTraverser;
-use PhpParser\ParserFactory;
 
 /**
  * @property ?string[] $paths
@@ -241,8 +237,6 @@ class ScanCommand extends Command
 
     private function extractIconsFromPHPFile(string $filePath): void
     {
-        $parser = (new ParserFactory())->createForNewestSupportedVersion();
-
         $fileContents = file_get_contents($filePath);
 
         if (! $fileContents) {
@@ -251,23 +245,8 @@ class ScanCommand extends Command
             return;
         }
 
-        try {
-            $ast = $parser->parse($fileContents);
-        } catch (Error $error) {
-            $this->writer()
-                ->error(sprintf('Parse error: %s', $error->getMessage()), true);
-            return;
-        }
-
-        if ($ast === null) {
-            return;
-        }
-
-        $traverser = new NodeTraverser();
-        $traverser->addVisitor(new IconsFunctionsVisitor($filePath, $this->iconData, $this->config));
-        $traverser->addVisitor(new IconsAnnotationsVisitor($filePath, $this->iconData, $this->config));
-
-        $traverser->traverse($ast);
+        $parser = new PhpParser($fileContents, $filePath, $this->iconData, $this->config);
+        $parser->parse();
     }
 
     /**
