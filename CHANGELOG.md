@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/yassinedoghri/php-icons/compare/v1.0.0...v1.1.0) (2024-10-07)
+
+### Internal
+
+- **core-parser:** replace `nikic/PHP-Parser` with `PhpToken` class
+  ([2bc0c37](https://github.com/yassinedoghri/php-icons/commit/2bc0c377b664501f48fee74cce2b9efae99c2bcf))
+
 # 1.0.0 (2024-09-28)
 
 ### Bug Fixes
