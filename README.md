@@ -20,9 +20,10 @@ Thanks to [Iconify](https://iconify.design/) ❤️
 
 ## 🧩 Integrations
 
-| Framework                                | Home                                                                                  | Description                                                                                                                                             |
-| ---------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [CodeIgniter4](https://codeigniter.com/) | [yassinedoghri/codeigniter-icons](https://github.com/yassinedoghri/codeigniter-icons) | A CodeIgniter4 library with convenient helper functions to render svg icons using [yassinedoghri/php-icons](https://github.com/yassinedoghri/php-icons) |
+| Framework                                | Home                                                                                  | Description                                                                                                                               |
+| ---------------------------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| [CodeIgniter4](https://codeigniter.com/) | [yassinedoghri/codeigniter-icons](https://github.com/yassinedoghri/codeigniter-icons) | A CodeIgniter4 library with convenient helper functions to render svg icons using [php-icons](https://github.com/yassinedoghri/php-icons) |
+| [Tempest](https://tempestphp.com/)       | [yassinedoghri/tempest-icons](https://github.com/yassinedoghri/tempest-icons)         | A Tempest library providing a convenient `icon(…)` function for rendering SVG icons with php-icons.                                       |
 
 ## 🚀 Getting started
 
