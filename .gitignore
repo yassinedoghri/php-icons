@@ -1,4 +1,5 @@
 /vendor/
+/example/vendor/
 
 /.pnpm-store/
 /node_modules/

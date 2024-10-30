@@ -1,0 +1,33 @@
+{
+  "name": "yassinedoghri/php-icons-example",
+  "description": "Example project to showcase php-icons",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Yassine Doghri",
+      "email": "yassine@doghri.fr"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PHPIcons\\Example\\": "src/"
+    }
+  },
+  "require": {
+    "yassinedoghri/php-icons": "@dev"
+  },
+  "scripts": {
+    "dev": "php -S 0.0.0.0:8000 src/index.php"
+  },
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "..",
+      "options": {
+        "symlink": false
+      }
+    }
+  ]
+}

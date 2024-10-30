@@ -15,8 +15,6 @@ class InitCommand extends Command
     public function __construct()
     {
         parent::__construct('init', 'Configure PHPIcons interactively');
-
-        $this->option('-c --config-file', 'Config file path', null, CLIENT_ROOTPATH . 'php-icons.php');
     }
 
     public function interact(Interactor $io): void
@@ -58,10 +56,12 @@ class InitCommand extends Command
 
         $this->writer()
             ->eol(2);
+
+        $configFile = CLIENT_ROOTPATH . 'php-icons.php';
         $this->writer()
-            ->info(sprintf('Generating config file (%s)…', $this->configFile));
+            ->info(sprintf('Generating config file (%s)…', $configFile));
         // check that file doesn't already exist
-        if (file_exists($this->configFile)) {
+        if (file_exists($configFile)) {
             $this->writer()
                 ->bold(' skipped!', true);
             $this->writer()
@@ -76,14 +76,10 @@ class InitCommand extends Command
             ->eol();
 
         // check that config file path is ok
-        $dirExists = is_dir(dirname($this->configFile));
+        $dirExists = is_dir(dirname($configFile));
 
         if (! $dirExists) {
             throw new \InvalidArgumentException('Config file must live in a valid directory.');
-        }
-
-        if (! str_ends_with($this->configFile, '.php')) {
-            throw new \InvalidArgumentException('Config file must end with .php extension.');
         }
 
         $configTemplate = file_get_contents(__DIR__ . '/../Templates/Config.template.php');
@@ -106,7 +102,7 @@ class InitCommand extends Command
             ->prompt('Set a default prefix (hit ENTER for none)', '', null, 0);
 
         $result = file_put_contents(
-            $this->configFile,
+            $configFile,
             str_replace("'/** DEFAULT_PREFIX **/'", "'{$defaultPrefix}'", $configTemplate)
         );
 
@@ -114,7 +110,7 @@ class InitCommand extends Command
             $this->writer()
                 ->eol();
             $this->writer()
-                ->error(sprintf('[KO] Error when writing config file %s', $this->configFile), true);
+                ->error(sprintf('[KO] Error when writing config file %s', $configFile), true);
             $this->writer()
                 ->eol();
 
@@ -124,7 +120,7 @@ class InitCommand extends Command
         $this->writer()
             ->eol();
         $this->writer()
-            ->ok(sprintf('[OK] PHPIcons initialized with config %s', realpath($this->configFile)), true);
+            ->ok(sprintf('[OK] PHPIcons initialized with config %s', realpath($configFile)), true);
         $this->writer()
             ->eol();
 

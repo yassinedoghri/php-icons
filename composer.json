@@ -47,15 +47,16 @@
   },
   "require-dev": {
     "kint-php/kint": "^5.1.1",
-    "phpstan/phpstan": "^1.12.6",
-    "rector/rector": "^1.2.6",
+    "phpstan/phpstan": "^1.12.7",
+    "rector/rector": "^1.2.8",
     "symplify/coding-standard": "^12.2.3",
     "symplify/easy-coding-standard": "^12.3.6",
-    "pestphp/pest": "^3.3.0",
-    "pestphp/pest-plugin-type-coverage": "^3.1.0"
+    "pestphp/pest": "^v3.5.0",
+    "pestphp/pest-plugin-type-coverage": "^v3.1.0"
   },
   "autoload": {
     "files": [
+      "src/functions.php",
       "src/Console/helpers.php"
     ],
     "psr-4": {
