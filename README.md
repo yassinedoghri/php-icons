@@ -18,13 +18,6 @@ your php files!
 
 Thanks to [Iconify](https://iconify.design/) ❤️
 
-## 🧩 Integrations
-
-| Framework                                | Home                                                                                  | Description                                                                                                                               |
-| ---------------------------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| [CodeIgniter4](https://codeigniter.com/) | [yassinedoghri/codeigniter-icons](https://github.com/yassinedoghri/codeigniter-icons) | A CodeIgniter4 library with convenient helper functions to render svg icons using [php-icons](https://github.com/yassinedoghri/php-icons) |
-| [Tempest](https://tempestphp.com/)       | [yassinedoghri/tempest-icons](https://github.com/yassinedoghri/tempest-icons)         | A Tempest library providing a convenient `icon(…)` function for rendering SVG icons with php-icons.                                       |
-
 ## 🚀 Getting started
 
 ### 1. Install via composer
@@ -46,9 +39,9 @@ project. See [config reference](#⚙️-config-reference) for more info.
 
 ### 3. Use anywhere
 
-#### 3.1. `icon(string $iconKey)` method
+#### 3.1. `icon(string $iconKey, array $attributes)` function
 
-Use the `icon` method in your view files with the icon key string
+Use the global `icon(…)` function in your view files with the icon key
 (`{prefix}:{icon}`) as parameter:
 
 - `{prefix}`: is the
@@ -57,33 +50,32 @@ Use the `icon` method in your view files with the icon key string
   [icon name](https://iconify.design/docs/icons/icon-basics.html#icon-names)
 
 ```php
-<?php
-
-use PHPIcons\PHPIcons;
-
-$phpicons = new PHPIcons('/path/to/config/file.php');
-
-echo $phpicons->icon('material-symbols:bolt');
+echo icon('material-symbols:bolt');
 // <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
 //      <path fill="currentColor" d="m8 22l1-7H4l9-13h2l-1 8h6L10 22z"/>
 // </svg>
 ```
 
-👉 add any attribute using the `attr()` or `attributes()` methods:
+👉 To add attributes, use the second parameter or call the `attr()` or
+`attributes()` methods:
 
 ```php
-echo $phpicons
-        ->icon('material-symbols:bolt')
-        ->attr('class', 'text-2xl')
-        ->attr('style', 'color: yellow;');
+echo icon('material-symbols:bolt', [
+        'class' => 'text-2xl',
+        'style' => 'color: yellow;'
+     ]);
 // <svg class="text-2xl" style="color: yellow;" […]>…</svg>
 
-echo $phpicons
-        ->icon('material-symbols:bolt')
-        ->attributes([
-          'class' => 'text-2xl',
-          'style' => 'color: yellow;'
-        ]);
+echo icon('material-symbols:bolt')
+      ->attr('class', 'text-2xl')
+      ->attr('style', 'color: yellow;');
+// <svg class="text-2xl" style="color: yellow;" […]>…</svg>
+
+echo icon('material-symbols:bolt')
+      ->attributes([
+        'class' => 'text-2xl',
+        'style' => 'color: yellow;'
+      ]);
 // <svg class="text-2xl" style="color: yellow;" […]>…</svg>
 ```
 
@@ -91,7 +83,7 @@ echo $phpicons
 > Find and copy the icon keys of popular open source icon sets from
 > [Iconify's index](https://icon-sets.iconify.design/).
 
-#### 3.2. Scan source files and load icons
+#### 3.2. Scan source files to load icons
 
 > [!IMPORTANT]  
 > When first defining icons, a placeholder (`�` by default) will be displayed.\
@@ -101,10 +93,35 @@ echo $phpicons
 vendor/bin/php-icons scan
 ```
 
+The `scan` command will perform a static analysis of all PHP files in your
+[configured paths](#paths) to identify icon keys (`{prefix}:{name}`) and
+download the corresponding icons.
+
+Using the `icon` identifier by default:
+
+1. `icon(…)` functions
+
+   ```php
+    echo icon('ri:php-fill')    // identified "ri:php-fill"
+   ```
+
+2. `@icon(…)` annotations in comments
+
+   ```php
+     // @icon('ri:heart-fill') --> identified "ri:heart-fill"
+
+     # @icon('ri:home-fill')   --> identified "ri:home-fill"
+
+     /*
+      * @icon('ri:user-fill')  --> identified "ri:user-fill"
+      * @icon('ri:group-fill') --> identified "ri:group-fill"
+      */
+   ```
+
 ## ⚙️ Config reference
 
-Your config file is used by both the `php-icons` CLI tool and PHPIcons class, it
-should look like this:
+Your config file is loaded by both the `php-icons` CLI tool and PHPIcons class,
+it should look like this:
 
 ```php
 <?php
@@ -170,14 +187,14 @@ my-custom-set/
 
 ```php
 // ✅ ALL GOOD
-echo $phpicons->icon('custom:heart');
-echo $phpicons->icon('custom:rocket');
-echo $phpicons->icon('custom:star');
-echo $phpicons->icon('custom:user');
+echo icon('custom:heart');
+echo icon('custom:rocket');
+echo icon('custom:star');
+echo icon('custom:user');
 
 // ❌ ICONS NOT FOUND
-echo $phpicons->icon('custom:banana');
-echo $phpicons->icon('custom:key');
+echo icon('custom:banana');
+echo icon('custom:key');
 ```
 
 ### Default Prefix
@@ -192,10 +209,10 @@ With `material-symbols` set as default prefix:
 
 ```php
 // this
-echo $phpicons->icon('bolt');
+echo icon('bolt');
 
 // same as this
-echo $phpicons->icon('material-symbols:bolt');
+echo icon('material-symbols:bolt');
 ```
 
 ### Default Icon

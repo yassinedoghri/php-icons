@@ -30,17 +30,19 @@ class PHPIcons implements \Stringable
 
     public function __construct(string $configFile = null)
     {
-        $configBuilder = PHPIconsConfig::configure();
+        if ($configFile === null) {
+            $reflection = new \ReflectionClass(\Composer\Autoload\ClassLoader::class);
+            $projectRoot = dirname((string) $reflection->getFileName(), 3);
 
-        // if specified, check that config file exists and load it
-        if ($configFile !== null) {
-            if (file_exists($configFile)) {
-                /** @var PHPIconsConfigBuilder $configBuilder */
-                $configBuilder = require $configFile;
-            } else {
-                throw new Exception('Config file ' . $configFile . 'was not found!');
-            }
+            $configFile = $projectRoot . DIRECTORY_SEPARATOR . 'php-icons.php';
         }
+
+        if (! file_exists($configFile)) {
+            throw new Exception(sprintf('Config file %s was not found!', $configFile));
+        }
+
+        /** @var PHPIconsConfigBuilder $configBuilder */
+        $configBuilder = require $configFile;
 
         $this->config = new PHPIconsConfig();
 

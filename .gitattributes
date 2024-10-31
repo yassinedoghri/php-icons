@@ -5,11 +5,19 @@
 
 /.devcontainer/    export-ignore
 /.github/          export-ignore
+/.pnpm-store/      export-ignore
+/example/          export-ignore
+/node_modules/     export-ignore
+/src/Icons.php     export-ignore
 /tests/            export-ignore
+/vendor/           export-ignore
 /.gitattributes    export-ignore
+/.prettierrc.json  export-ignore
 /.gitignore        export-ignore
 /.releaserc        export-ignore
+/CHANGELOG.md      export-ignore
 /CONTRIBUTING.md   export-ignore
+/coverage.xml      export-ignore
 /ecs.php           export-ignore
 /package.json      export-ignore
 /phpstan.neon      export-ignore
