@@ -17,5 +17,10 @@
         <include>
             <directory>src</directory>
         </include>
+        <exclude>
+            <file>./src/Icons.php</file>
+            <file>./src/Console/Constants.php</file>
+            <directory>./src/Console/Templates</directory>
+        </exclude>
     </source>
 </phpunit>

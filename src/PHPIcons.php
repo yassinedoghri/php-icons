@@ -16,9 +16,6 @@ class PHPIcons implements \Stringable
 
     protected string $prefix = '';
 
-    /**
-     * @var ?key-of<Icons::DATA>
-     */
     protected ?string $iconKey = null;
 
     /**
@@ -96,9 +93,6 @@ class PHPIcons implements \Stringable
         return $iconSVG;
     }
 
-    /**
-     * @param string|key-of<Icons::DATA> $iconKey
-     */
     public function icon(string $iconKey): self
     {
         if (! str_contains($iconKey, ':')) {

@@ -21,7 +21,7 @@
     "rector:fix": "vendor/bin/rector process --ansi",
     "style": "vendor/bin/ecs check --ansi",
     "style:fix": "vendor/bin/ecs check --fix --ansi",
-    "pest": "./vendor/bin/pest --bail --colors=always",
+    "pest": "./vendor/bin/pest --colors=always",
     "pest:parallel": "./vendor/bin/pest --colors=always --parallel",
     "pest:profiling": "./vendor/bin/pest --colors=always --profile",
     "pest:coverage": "./vendor/bin/pest --colors=always --parallel --coverage",
@@ -51,7 +51,7 @@
     "rector/rector": "^1.2.8",
     "symplify/coding-standard": "^12.2.3",
     "symplify/easy-coding-standard": "^12.3.6",
-    "pestphp/pest": "^v3.5.0",
+    "pestphp/pest": "v3.5.1",
     "pestphp/pest-plugin-type-coverage": "^v3.1.0"
   },
   "autoload": {

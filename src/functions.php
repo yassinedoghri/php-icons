@@ -19,6 +19,11 @@ class PHPIconsSingleton
 
         return self::$instance;
     }
+
+    public static function setInstance(string $configFile = null): void
+    {
+        self::$instance = new PHPIcons($configFile);
+    }
 }
 
 /**

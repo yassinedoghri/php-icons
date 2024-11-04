@@ -9,7 +9,10 @@ return ECSConfig::configure()
     ->withPaths([__DIR__ . DIRECTORY_SEPARATOR . 'src', __DIR__ . DIRECTORY_SEPARATOR . 'tests'])
     ->withRootFiles()
     ->withPreparedSets(cleanCode: true, common: true, symplify: true, psr12: true, strict: true)
-    ->withSkip([__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Icons.php'])
+    ->withSkip([
+        __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Icons.php',
+        __DIR__ . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'snapshots',
+    ])
     ->withConfiguredRule(BinaryOperatorSpacesFixer::class, [
         'operators' => [
             '=>' => 'align_single_space_minimal',

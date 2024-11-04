@@ -1,22 +1,3 @@
-<?php
-
-declare(strict_types=1);
-
-use PHPIcons\PHPIcons;
-
-if (! function_exists('icon')) {
-    /**
-     * @param  array<string, string>  $attributes
-     */
-    function icon(string $iconKey, array $attributes = []): string
-    {
-        return (string) (new PHPIcons())
-            ->icon($iconKey)
-            ->attributes($attributes);
-    }
-}
-
-?>
 
 <div class="relative text-xs group">
     <h1>This is an exemple file</h1>
@@ -37,5 +18,3 @@ if (! function_exists('icon')) {
         <li><?= icon('lucide:airplay') ?></li>
     </ul>
 </div>
-
-

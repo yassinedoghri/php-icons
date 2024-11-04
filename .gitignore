@@ -7,3 +7,6 @@
 coverage.xml
 
 /src/Icons.php
+
+/tests/Fixtures/temp_views/*
+!/tests/Fixtures/temp_views/.gitkeep
