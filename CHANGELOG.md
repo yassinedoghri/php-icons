@@ -1,3 +1,13 @@
+## [1.2.0](https://github.com/yassinedoghri/php-icons/compare/v1.1.0...v1.2.0) (2024-11-06)
+
+### Features
+
+- add ability to pass PHPIconsConfigBuilder when instantiating PHPIcons
+  ([fb73e9a](https://github.com/yassinedoghri/php-icons/commit/fb73e9a924c809aff6012b5e6297d22581a35b5b))
+- add global icon(…) function
+  ([#3](https://github.com/yassinedoghri/php-icons/issues/3))
+  ([c2d64cd](https://github.com/yassinedoghri/php-icons/commit/c2d64cd7b2b42bf1faf32030f5bd6fe0c7cfddaa))
+
 ## [1.1.0](https://github.com/yassinedoghri/php-icons/compare/v1.0.0...v1.1.0) (2024-10-07)
 
 ### Internal
