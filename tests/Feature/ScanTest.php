@@ -31,7 +31,8 @@ describe('scan', function () {
     );
 
     it('can add new icons', function () {
-        $this->copyViewFileToTemp('fakeView2.php');
+        // check that scan detects icon keys in subfolders
+        $this->copyViewFileToTemp('fakeView2.php', 'subfolder/fakeView2.php');
 
         $this->runPHPIconsScan();
 

@@ -14,15 +14,17 @@ class PHPIconsSingleton
     public static function getInstance(): PHPIcons
     {
         if (! self::$instance instanceof \PHPIcons\PHPIcons) {
+            // @codeCoverageIgnoreStart
             self::$instance = new PHPIcons();
+            // @codeCoverageIgnoreEnd
         }
 
         return self::$instance;
     }
 
-    public static function setInstance(string $configFile = null): void
+    public static function setInstance(PHPIcons $phpIcons): void
     {
-        self::$instance = new PHPIcons($configFile);
+        self::$instance = $phpIcons;
     }
 }
 

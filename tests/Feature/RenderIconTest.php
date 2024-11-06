@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use PHPIcons\Config\PHPIconsConfig;
+use PHPIcons\Exceptions\IconNotFoundException;
 use PHPIcons\Exceptions\LibraryMisuseException;
 use PHPIcons\PHPIcons;
 
@@ -72,4 +74,14 @@ describe('render icon', function () {
                 '<svg class="text-xl" style="color: green;" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"/></svg>'
             );
     });
+
+    it('throws icon not found when no placeholder is set', function () {
+        $phpIcons = new PHPIcons(
+            PHPIconsConfig::configure()
+                ->withPaths([TEST_TEMP_VIEWS_PATH])
+                ->withPlaceholder('')
+        );
+
+        return (string) $phpIcons->icon('foo:bar');
+    })->throws(IconNotFoundException::class);
 });

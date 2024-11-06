@@ -17,12 +17,20 @@ trait TestHelperTrait
         @unlink(TEST_ICONS_FILE_PATH);
     }
 
-    public function clearTempViews(): void
+    public function clearTempViews(string $folder = null): void
     {
-        $tempViewFiles = glob(TEST_TEMP_VIEWS_PATH . '*.php') ?? [];
+        $tempViewFiles = $folder === null ? glob(TEST_TEMP_VIEWS_PATH . '*') : glob(rtrim($folder, '/') . '/*');
+
         foreach ($tempViewFiles as $viewFile) {
-            // add @ to discard "No such file or directory" warning if file does not exist
-            @unlink($viewFile);
+            if (is_dir($viewFile)) {
+                $this->clearTempViews($viewFile);
+                rmdir($viewFile);
+            }
+
+            if (str_ends_with($viewFile, '.php')) {
+                // add @ to discard "No such file or directory" warning if file does not exist
+                @unlink($viewFile);
+            }
         }
     }
 
@@ -42,9 +50,19 @@ trait TestHelperTrait
         $scan->execute();
     }
 
-    public function copyViewFileToTemp(string $viewFile): void
+    public function copyViewFileToTemp(string $viewFile, string $destination = null): void
     {
-        copy(TEST_VIEWS_PATH . $viewFile, TEST_TEMP_VIEWS_PATH . $viewFile);
+        if ($destination === null) {
+            $destination = $viewFile;
+        }
+
+        $destinationFile = TEST_TEMP_VIEWS_PATH . $destination;
+        $directory = dirname($destinationFile);
+        if (! is_dir($directory)) {
+            mkdir($directory, 0777, true);
+        }
+
+        copy(TEST_VIEWS_PATH . $viewFile, $destinationFile);
     }
 
     public function copyIconsSnapshot(string $snapshot): void
