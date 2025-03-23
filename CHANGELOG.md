@@ -1,3 +1,10 @@
+## [1.3.0](https://github.com/yassinedoghri/php-icons/compare/v1.2.0...v1.3.0) (2025-03-23)
+
+### Features
+
+- edit code to remove php 8.4 deprecation warnings
+  ([d7952e8](https://github.com/yassinedoghri/php-icons/commit/d7952e8e2c3527a4db8fdd68315ec0d12fb50cf7))
+
 ## [1.2.0](https://github.com/yassinedoghri/php-icons/compare/v1.1.0...v1.2.0) (2024-11-06)
 
 ### Features
