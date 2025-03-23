@@ -84,7 +84,7 @@ class PHPIconsConfigBuilder
         return $this;
     }
 
-    public function withDefaultIcon(string $defaultIcon = null): self
+    public function withDefaultIcon(?string $defaultIcon = null): self
     {
         $this->defaultIcon = $defaultIcon;
 

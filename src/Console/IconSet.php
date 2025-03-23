@@ -14,9 +14,8 @@ class IconSet
     private bool $found = false;
 
     public function __construct(
-        private string $prefix
+        private readonly string $prefix
     ) {
-        $this->prefix = $prefix;
     }
 
     public function addIcon(Icon $icon): void

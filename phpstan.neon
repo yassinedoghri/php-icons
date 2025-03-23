@@ -3,6 +3,8 @@ parameters:
 	paths:
 		- src
 		- tests
+	dynamicConstantNames:
+		- PHPIcons\Icons::DATA
 	ignoreErrors:
 		- '#Call to an undefined method Pest\\PendingCalls\\TestCall\:\:expect\(\)#'
 		- '#Call to an undefined method PHPUnit\\Framework\\TestCase\:\:[a-zA-Z0-9\\_]+\(\)#'

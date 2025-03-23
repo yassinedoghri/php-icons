@@ -9,6 +9,7 @@ use Exception;
 use PHPIcons\Console\Commands\InitCommand;
 use PHPIcons\Console\Commands\ScanCommand;
 
+// @phpstan-ignore trait.unused
 trait TestHelperTrait
 {
     public function clearIconsClass(): void
@@ -17,7 +18,7 @@ trait TestHelperTrait
         @unlink(TEST_ICONS_FILE_PATH);
     }
 
-    public function clearTempViews(string $folder = null): void
+    public function clearTempViews(?string $folder = null): void
     {
         $tempViewFiles = $folder === null ? glob(TEST_TEMP_VIEWS_PATH . '*') : glob(rtrim($folder, '/') . '/*');
 
@@ -50,7 +51,7 @@ trait TestHelperTrait
         $scan->execute();
     }
 
-    public function copyViewFileToTemp(string $viewFile, string $destination = null): void
+    public function copyViewFileToTemp(string $viewFile, ?string $destination = null): void
     {
         if ($destination === null) {
             $destination = $viewFile;

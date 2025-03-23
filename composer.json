@@ -43,16 +43,16 @@
   "require": {
     "php": ">=8.1",
     "composer-runtime-api": "^2.2",
-    "adhocore/cli": "^1.7.2"
+    "adhocore/cli": "^v1.9.3"
   },
   "require-dev": {
-    "kint-php/kint": "^5.1.1",
-    "phpstan/phpstan": "^1.12.7",
-    "rector/rector": "^1.2.8",
+    "kint-php/kint": "^6.0.1",
+    "phpstan/phpstan": "^2.1.10",
+    "rector/rector": "^2.0.10",
     "symplify/coding-standard": "^12.2.3",
-    "symplify/easy-coding-standard": "^12.3.6",
-    "pestphp/pest": "v3.5.1",
-    "pestphp/pest-plugin-type-coverage": "^v3.1.0"
+    "symplify/easy-coding-standard": "^12.5.9",
+    "pestphp/pest": "^3.7.4",
+    "pestphp/pest-plugin-type-coverage": "^3.4.0"
   },
   "autoload": {
     "files": [

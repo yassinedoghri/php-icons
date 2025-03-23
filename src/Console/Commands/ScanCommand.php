@@ -164,7 +164,7 @@ class ScanCommand extends Command
                 CURLOPT_URL,
                 sprintf('%s/%s.json?icons=%s', $host, $iconSet->getPrefix(), implode(',', $iconSet->getIconNames()))
             );
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept: application/json']);
 
             /** @var string|false $response */

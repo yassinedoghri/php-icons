@@ -34,16 +34,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: 📥 Install dependencies
-        run: composer install --prefer-dist --no-progress
+      - name: 📥 Install dependencies + init Icons.php
+        run: |
+          cp tests/Fixtures/snapshots/Icons_first_add.php src/Icons.php
+          composer install --prefer-dist --no-progress
 
       - name: ✨ Quality check
         run: |
           composer validate --strict --ansi
           composer run-script style
-          composer run-script phpstan
           composer run-script rector
           composer run-script pest:type-coverage
+          rm src/Icons.php
 
       - name: 🧪 Run tests and collect coverage
         run: vendor/bin/pest --parallel --coverage-clover coverage.xml

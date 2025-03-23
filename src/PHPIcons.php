@@ -25,7 +25,7 @@ class PHPIcons implements \Stringable
 
     protected PHPIconsConfig $config;
 
-    public function __construct(PHPIconsConfigBuilder|string $config = null)
+    public function __construct(PHPIconsConfigBuilder|string|null $config = null)
     {
         if ($config === null) {
             // no config provided, get config in project root path
@@ -57,8 +57,8 @@ class PHPIcons implements \Stringable
         }
 
         $iconSVG = '';
+
         // check if icon has already been downloaded
-        // @phpstan-ignore-next-line
         if (array_key_exists($this->iconKey, Icons::DATA)) {
             $iconSVG = Icons::DATA[$this->iconKey];
         } else { // icon was not found

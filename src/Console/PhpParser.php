@@ -71,7 +71,7 @@ class PhpParser
         }
 
         /**
-         * @var array{0:string,1:int} $iconKeyMatch
+         * @var array{non-empty-string,int<-1, max>} $iconKeyMatch
          */
         foreach ($matches['iconKey'] as $iconKeyMatch) {
             $startFilePosition = $commentToken->pos + $iconKeyMatch[1];
