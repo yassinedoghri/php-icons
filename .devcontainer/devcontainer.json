@@ -12,7 +12,7 @@
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/node:1": {}
+    "ghcr.io/devcontainers/features/node:2": {}
   },
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "composer install && pnpm install",
